@@ -1,36 +1,197 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IT Multitool
 
-## Getting Started
+A self-hosted collection of IT and developer tools built with Next.js and shadcn/ui. No accounts, no tracking, no data collection required.
 
-First, run the development server:
+## Features
 
+- 🔒 **Privacy-First**: All processing happens in your browser or on your server
+- 🚀 **Self-Hosted**: Deploy anywhere you want
+- 🎨 **Modern UI**: Built with shadcn/ui components
+- 🔌 **Modular**: Easy to add, remove, or customize tools
+- 📱 **Responsive**: Works on desktop, tablet, and mobile
+
+## Included Tools
+
+### Network Tools
+- Subnet Calculator/Validator
+- Open Port Checker
+- IP Address Lookup
+- WHOIS Domain Checker
+- API Tester (Postman-like)
+
+### Data Processing
+- JSON/XML Format Checker
+- Data Converter (JSON to CSV, etc.)
+- Diff Comparison Tool
+
+### Encoding Tools
+- Base64 Encoder/Decoder
+- URL Encoder/Decoder
+- QR Code Generator
+
+### Security Tools
+- Encryption/Decryption Tool (AES)
+- Hash Generator (MD5, SHA)
+- JWT Decoder
+- File Metadata Cleaner
+
+### Image Tools
+- Image Converter (PNG to JPG, ICO, etc.)
+- Image Compressor
+- Image Resizer
+
+### Development Tools
+- Regex Tester
+- Timestamp Converter
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+ or higher
+- npm, yarn, or pnpm
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd tools-hofflabs
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build for Production
 
-## Learn More
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Deploy Options
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Vercel (Recommended for Next.js)
+```bash
+npm install -g vercel
+vercel
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Docker
+```bash
+docker build -t it-multitool .
+docker run -p 3000:3000 it-multitool
+```
 
-## Deploy on Vercel
+#### Traditional Server (with PM2)
+```bash
+npm install -g pm2
+npm run build
+pm2 start npm --name "it-multitool" -- start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Static Export (for static hosting)
+```bash
+# Add to next.config.js: output: 'export'
+npm run build
+# Deploy the 'out' directory to any static host
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Adding Custom Tools
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed instructions on how to add your own tools to the application.
+
+Quick overview:
+1. Create a new tool component in `tools/`
+2. Register it in `lib/tool-registry.ts`
+3. That's it!
+
+## Project Structure
+
+```
+tools-hofflabs/
+├── app/                    # Next.js app directory
+│   ├── layout.tsx         # Root layout with header
+│   ├── page.tsx           # Home page
+│   ├── tools/             # Tools listing page
+│   └── tool/[id]/         # Individual tool pages
+├── components/            # React components
+│   ├── ui/               # shadcn/ui components
+│   ├── layout/           # Layout components (header, etc.)
+│   └── tool-card.tsx     # Tool card component
+├── lib/                  # Utility libraries
+│   ├── types/           # TypeScript type definitions
+│   └── tool-registry.ts # Central tool registry
+├── tools/               # Individual tool implementations
+│   ├── base64-tool.tsx
+│   ├── hash-generator.tsx
+│   └── ...
+└── public/             # Static assets
+```
+
+## Configuration
+
+### Environment Variables
+
+No environment variables are required for basic operation. All tools run client-side or use public APIs.
+
+### Customization
+
+- **Theme**: Edit `app/globals.css` to customize colors
+- **Branding**: Update the header in `components/layout/header.tsx`
+- **Tool Categories**: Modify categories in `lib/types/tool.ts`
+
+## Technology Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+
+## Browser Compatibility
+
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+
+## Security
+
+- All sensitive operations (encryption, hashing) use the Web Crypto API
+- No data is sent to external servers
+- No cookies or tracking
+- All processing happens client-side when possible
+
+## License
+
+MIT License - feel free to use this project however you'd like!
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
+
+## Support
+
+For issues, questions, or suggestions, please open an issue on GitHub.
+
+---
+
+Made with ❤️ for developers and IT professionals
