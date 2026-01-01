@@ -3,6 +3,8 @@ import { getToolById } from "@/lib/tool-registry";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+export const runtime = 'edge';
+
 export default async function ToolPage({
   params,
 }: {
