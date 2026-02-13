@@ -5,6 +5,8 @@ export interface Tool {
   category: string;
   icon?: string;
   component: React.ComponentType;
+  /** If true, this tool is only available when NEXT_PUBLIC_SITE_MODE is not 'public' */
+  internalOnly?: boolean;
 }
 
 export type ToolCategory = 

@@ -1,4 +1,5 @@
 import { Tool } from "./types/tool";
+import { isPublicMode } from "./site-config";
 
 // Import all tools here
 import SubnetCalculator from "@/tools/subnet-calculator";
@@ -54,6 +55,7 @@ export const tools: Tool[] = [
     description: "Test HTTP/REST APIs",
     category: "Network",
     component: ApiTester,
+    internalOnly: true,
   },
   {
     id: "port-checker",
@@ -61,6 +63,7 @@ export const tools: Tool[] = [
     description: "Check open ports on a host",
     category: "Network",
     component: PortChecker,
+    internalOnly: true,
   },
   {
     id: "ip-lookup",
@@ -68,6 +71,7 @@ export const tools: Tool[] = [
     description: "Get information about an IP address",
     category: "Network",
     component: IpLookup,
+    internalOnly: true,
   },
   {
     id: "whois-checker",
@@ -169,8 +173,28 @@ export const tools: Tool[] = [
   },
 ];
 
+/**
+ * Get all tools, optionally filtering out internal-only tools in public mode
+ */
+export function getAvailableTools(): Tool[] {
+  if (isPublicMode()) {
+    return tools.filter((tool) => !tool.internalOnly);
+  }
+  return tools;
+}
+
 export function getToolById(id: string): Tool | undefined {
   return tools.find((tool) => tool.id === id);
+}
+
+/**
+ * Check if a tool is accessible in the current site mode
+ */
+export function isToolAccessible(tool: Tool): boolean {
+  if (tool.internalOnly && isPublicMode()) {
+    return false;
+  }
+  return true;
 }
 
 export function getToolsByCategory(category: string): Tool[] {
